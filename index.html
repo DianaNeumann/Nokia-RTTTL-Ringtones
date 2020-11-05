@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nokia Composer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.PNG">
+</head>
+
+<body>
+    <div style="display:flex;flex-direction:column;align-items:stretch;">
+        <div style="display:flex;margin-bottom:1rem;">
+          <label for="bpm">BPM:</label><input id="bpm" value="120" size="3" />
+          <span style="flex:1"></span>
+        </div>
+        <div id="song" contenteditable="true" spellcheck="false"></div>
+        <a id="btn" href="javascript:void(0)" onclick="togglePlayback()">
+          Play
+        </a>
+    </div>
+<script>
+      // Safari все еще не поддерживает AudioContext
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      // Загрузить песню из  URL
+      try {
+        const data = JSON.parse(atob(location.hash.slice(1)));
+        bpm.value = data.bpm;
+        song.innerText = data.song;
+      } catch (ignored) {
+        // Стандартный ригнтон Nokia 
+        bpm.value = '120';
+        song.innerText = `16e2 16d2 8#f 8#g 16#c2 16b 8d 8e 16b 16a 8#c 8e 2a 2-`;
+      }
+     
+      function togglePlayback() {
+        if (audio) {
+          stop();
+          btn.innerText = 'Play';
+        } else {
+          btn.innerText = 'Stop';
+          play(song.innerText, clamp(bpm.value, 40, 400));
+        }
+      }
+</script>
+<script src="main.js"></script>
+</body>
+</html>

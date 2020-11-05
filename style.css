@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'N';
+    src: url('N.ttf');
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'N';
+    font-size: 5vmin;
+    border: 0;
+    outline: 0;
+    background: #7b8;
+    color: #333;
+  }
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    margin:1rem;
+    text-align:center;
+  }
+  body {
+    width: 15rem;
+    margin: 4rem auto; 
+}
